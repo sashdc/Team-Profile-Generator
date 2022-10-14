@@ -55,7 +55,7 @@
         `
     }
 
-    displayTeamPage = data => {
+    buildPage = data => {
         const cards = []
       
         for (let i = 0; i < data.length; i++) {
@@ -80,10 +80,10 @@
       
         const teamCards = cards.join('')
       
-        return createTeamPage(teamCards)
+        return pageHtml(teamCards)
       }
       
-      const createTeamPage = function(teamCards) {
+      const pageHtml = function(teamCards) {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -113,4 +113,4 @@
       `
       }
       
-      module.exports = displayTeamPage
+      module.exports = buildPage

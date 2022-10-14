@@ -11,17 +11,17 @@ const team = []
 const questions = [
     {
       type: 'input',
-      message: 'Please enter Team Manager name',
+      message: "Please enter the Team Manager's name",
       name: 'name',
     },
     {
         type: 'input',
-        message: 'Please enter Team Manager Employee ID.',
+        message: "Please enter Team Manager's Employee ID#.",
         name: 'id',
       },
       {
         type: 'input',
-        message: 'Please enter Team Manager email address.',
+        message: "Please enter Team Manager's email address.",
         name: 'email',
       },
       {
@@ -62,13 +62,13 @@ const empQuestions =[
       },
       {
         type: 'input',
-        message: "Please enter team member's Github:",
+        message: "Please enter the engineer's Github:",
         when: input => input.role === 'Engineer',
         name: 'github',
       },
       {
         type: 'input',
-        message: "Intern's School:",
+        message: "Please enter the Intern's School:",
         when: input => input.role === 'Intern',
         name: 'school',
       },
@@ -81,7 +81,7 @@ function init() {
       const { name, id, email, officeNumber } = answers;
       const manager = new Manager(name, id, email, officeNumber);
         team.push(manager)
-        console.log(team)
+        console.log('<---------------------------------->')
         addMore()
                 }
     )
@@ -95,8 +95,6 @@ function addMore(){
       buildTeam()
     }
     else if (answers.addEmployee== false){
-      console.log(team)
-      console.log('team built, go away now.')
       createPage(team)     }
 })}
 
@@ -108,19 +106,20 @@ function addMore(){
         const { name, id, email, github } = answers;
         const engineer = new Engineer(name, id, email, github);
           team.push(engineer)
-          console.log(team)
+          console.log('<---------------------------------->')
           addMore()
       }
       else if (answers.role==='Intern'){
         const { name, id, email, school } = answers;
         const intern = new Intern(name, id, email, school);
           team.push(intern)
-          console.log(team)
+          console.log('<---------------------------------->')
+
           addMore()
       }})}
 
 function createPage(team) { 
-   fs.writeFile('team.html', displayTeamPage(team), (err) =>
+   fs.writeFile('team.html', buildPage(team), (err) =>
    err ? console.log(err) : console.log('Successfully created Team Page!')
       );}
 
