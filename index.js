@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 const team = []
-
+// intital questions for managaer
 const questions = [
     {
       type: 'input',
@@ -37,7 +37,7 @@ const moreQuestions = [  {
       default: true,
       name: 'addEmployee',
     }]
-
+// questions for other team members
 const empQuestions =[ 
     {
         type: 'list',
@@ -74,6 +74,7 @@ const empQuestions =[
       },
          ]
 
+//  init function to start app, asking for and adding manager details to the team array
 function init() {
     inquirer.prompt(questions)
     .then
@@ -86,7 +87,7 @@ function init() {
                 }
     )
   }
-
+// function to bridge manager questions with team questiosn
 function addMore(){
   inquirer.prompt(moreQuestions)
   .then
@@ -97,7 +98,7 @@ function addMore(){
     else if (answers.addEmployee== false){
       createPage(team)     }
 })}
-
+// asks team questions , then assigns classes based on answers and pushes them to the team array with the assigned class
   function buildTeam(){
     inquirer.prompt(empQuestions)
           .then
@@ -118,6 +119,7 @@ function addMore(){
           addMore()
       }})}
 
+      // writes the team page to an HTML file
 function createPage(team) { 
    fs.writeFile('team.html', buildPage(team), (err) =>
    err ? console.log(err) : console.log('Successfully created Team Page!')

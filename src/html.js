@@ -1,4 +1,5 @@
-    const ManCard = function(manager) {
+// destructurs manager class and builds HTML structure for the Manager card
+const ManCard = function(manager) {
     const {name, id, email, officeNumber} = manager;
   return `
     <section class="col-4 mt-3">
@@ -16,6 +17,7 @@
         </div>
     </section>
     `}
+// destructurs engineer class and builds HTML structure for the engineer card
 
     const EngCard = function(engineer) {
         const {name, id, email, github} = engineer;
@@ -35,7 +37,7 @@
         </section>
         `
     }
-
+// destructurs inern class and builds HTML structure for the intern card
     const IntCard = function(intern) {
         const {name, id, email, school} = intern;
       return `
@@ -54,7 +56,7 @@
     </section>
         `
     }
-
+// sorts and assigns data  by role so they are built using the right card template
     buildPage = data => {
         const cards = []
       
@@ -82,7 +84,7 @@
       
         return pageHtml(teamCards)
       }
-      
+      // full page html to inserrt cards and data into
       const pageHtml = function(teamCards) {
         return `
         <!DOCTYPE html>
@@ -92,8 +94,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Your Team</title>
                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-            <link rel="stylesheet" href="style.css">
-        </head>
+                    </head>
         <body>
             <header>
             <div class="jumbotron jumbotron-fluid bg-dark text-white">
