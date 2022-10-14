@@ -2,6 +2,7 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const html = require('./src/html')
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -30,11 +31,18 @@ const questions = [
       }
   ]
 
-  const empQuestions =[ 
+const moreQuestions = [  {
+      type: 'confirm',
+      message: 'Would you like to add another team member?',
+      default: true,
+      name: 'addEmployee',
+    }]
+
+const empQuestions =[ 
     {
         type: 'list',
         message: "Choose Next employee's role",
-        choices: ['Engineer', 'Intern', 'Finished Building Team'],
+        choices: ['Engineer', 'Intern'],
         name: 'role'
       },
       {
@@ -64,16 +72,9 @@ const questions = [
         when: input => input.role === 'Intern',
         name: 'school',
       },
-      // {
-      //   type: 'confirm',
-      //   message: 'Would you like to add another team member?',
-      //   default: false,
-      //   name: 'addEmployee',
-      // }
-    ]
+         ]
 
-
-  function init() {
+function init() {
     inquirer.prompt(questions)
     .then
     (function (answers){
@@ -81,34 +82,47 @@ const questions = [
       const manager = new Manager(name, id, email, officeNumber);
         team.push(manager)
         console.log(team)
-        buildTeam()
-          // .then
-          // buildTeam()
-            }
+        addMore()
+                }
     )
   }
+
+function addMore(){
+  inquirer.prompt(moreQuestions)
+  .then
+  (function (answers){      
+    if (answers.addEmployee=== true){
+      buildTeam()
+    }
+    else if (answers.addEmployee== false){
+      console.log(team)
+      console.log('team built, go away now.')
+      createPage(team)     }
+})}
 
   function buildTeam(){
     inquirer.prompt(empQuestions)
           .then
     (function (answers){      
-      if (answers.role='Engineer'){
+      if (answers.role==='Engineer'){
         const { name, id, email, github } = answers;
         const engineer = new Engineer(name, id, email, github);
           team.push(engineer)
           console.log(team)
+          addMore()
       }
-      else if (answers.role='Intern'){
+      else if (answers.role==='Intern'){
         const { name, id, email, school } = answers;
         const intern = new Intern(name, id, email, school);
           team.push(intern)
           console.log(team)
-      }
-      else if (answers.role='Finished Building Team'){
-        console.log("Team Built, go home now")
-      }})
-      
-      }
+          addMore()
+      }})}
 
-  init()
-  // .then(buildTeam)
+function createPage(team) { 
+   fs.writeFile('team.html', displayTeamPage(team), (err) =>
+   err ? console.log(err) : console.log('Successfully created Team Page!')
+      );}
+
+
+init()
