@@ -1,4 +1,4 @@
-// destructurs manager class and builds HTML structure for the Manager card
+// destructures manager class and builds HTML structure for the Manager card
 const ManCard = function(manager) {
     const {name, id, email, officeNumber} = manager;
   return `
@@ -10,14 +10,14 @@ const ManCard = function(manager) {
                 <h2>Manager</h2>
             </div>
             <div class = 'text-center m-2'>
-            <li class="list-group-item">ID#: ${id}</li>
-            <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
-            <li class="list-group-item">Office Number: ${officeNumber}</li>
+            <li class="list-group-item"><b>ID#:</b> ${id}</li>
+            <li class="list-group-item"><b>Email:</b> <a href="mailto:${email}">${email}</a></li>
+            <li class="list-group-item"><b>Office Number:</b> ${officeNumber}</li>
             </div>
         </div>
     </section>
     `}
-// destructurs engineer class and builds HTML structure for the engineer card
+// destructures engineer class and builds HTML structure for the engineer card
 
     const EngCard = function(engineer) {
         const {name, id, email, github} = engineer;
@@ -29,15 +29,15 @@ const ManCard = function(manager) {
                     <h2>Engineer</h2>
                 </div>
                 <div class = 'text-center m-2'>
-                <li class="list-group-item">ID#: ${id}</li>
-                <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
-                <li class="list-group-item">Github: <a href="https://github.com/${github}">${github}</a></li>
+                <li class="list-group-item"><b>ID#:</b> ${id}</li>
+                <li class="list-group-item"><b>Email:</b> <a href="mailto:${email}">${email}</a></li>
+                <li class="list-group-item"><b>Github:</b> <a href="https://github.com/${github}">${github}</a></li>
                 </div>
             </div>
         </section>
         `
     }
-// destructurs inern class and builds HTML structure for the intern card
+// destructures intern class and builds HTML structure for the intern card
     const IntCard = function(intern) {
         const {name, id, email, school} = intern;
       return `
@@ -48,15 +48,15 @@ const ManCard = function(manager) {
                     <h2>Intern</h2>
                 </div>
                 <div class = 'text-center m-2'>
-                <li class="list-group-item">ID#: ${id}</li>
-                <li class="list-group-item">Email:<a href="mailto:${email}">${email}</a></li>
-                <li class="list-group-item">School: ${school}</li>
+                <li class="list-group-item"><b>ID#:</b> ${id}</li>
+                <li class="list-group-item"><b>Email:</b> <a href="mailto:${email}">${email}</a></li>
+                <li class="list-group-item"><b>School:</b> ${school}</li>
                 </div>
         </div>
     </section>
         `
     }
-// sorts and assigns data  by role so they are built using the right card template
+// sorts and assigns data  by role and builds cards using the right card template
     buildPage = data => {
         const cards = []
       
@@ -65,27 +65,27 @@ const ManCard = function(manager) {
           let role = team.getRole()
       
           if (role === 'Manager') {
-            const managerCard = ManCard(team)
-            cards.push(managerCard)
+            const manCard = ManCard(team)
+            cards.push(manCard)
           }
       
           else if (role === 'Engineer') {
-            const engineerCard = EngCard(team)
-            cards.push(engineerCard)
+            const engCard = EngCard(team)
+            cards.push(engCard)
           }
       
           else if (role === 'Intern') {
-            const internCard = IntCard(team)
-            cards.push(internCard)
+            const intCard = IntCard(team)
+            cards.push(intCard)
           }
         }
+
+        const allCards = cards.join('')
       
-        const teamCards = cards.join('')
-      
-        return pageHtml(teamCards)
+        return pageHtml(allCards)
       }
       // full page html to inserrt cards and data into
-      const pageHtml = function(teamCards) {
+      const pageHtml = function(allCards) {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -104,8 +104,7 @@ const ManCard = function(manager) {
             <main>
                 <section class="container">
                     <div class="row justify-content-center">
-                        ${teamCards}
-                    </div>
+                        ${allCards}   </div>
                 </section>
             </main>
             
