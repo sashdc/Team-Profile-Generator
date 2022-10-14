@@ -97,7 +97,7 @@ const ManCard = function(manager) {
                     </head>
         <body>
             <header>
-            <div class="jumbotron jumbotron-fluid bg-dark text-white">
+            <div class="jumbotron shadow jumbotron-fluid bg-dark text-white">
             <h1 class="text-center">Team Profile</h1>
                 </nav>
             </header>
